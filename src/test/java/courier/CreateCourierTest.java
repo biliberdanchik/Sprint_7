@@ -17,7 +17,6 @@ public class CreateCourierTest {
     private ScooterServiceClient client;
     private Courier courier;
     private static final String BASE_URI = "https://qa-scooter.praktikum-services.ru/";
-    private Credentials credentials;
     private Faker faker;
     ValidatableResponse response;
     private boolean dataCleanupFlag;
@@ -87,7 +86,7 @@ public class CreateCourierTest {
     @After
     public void deleteCourierAfterTest() {
         if (dataCleanupFlag) {
-            credentials = Credentials.fromCourier(courier);
+            Credentials credentials = Credentials.fromCourier(courier);
             String id = client.loginCourier(credentials).extract().jsonPath().getString("id");
             client.deleteCourier(id);
         }
