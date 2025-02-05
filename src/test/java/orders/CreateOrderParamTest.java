@@ -20,9 +20,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 public class CreateOrderParamTest {
 
     private ScooterServiceClient client;
-    private Order order;
     private Faker faker;
-    private ValidatableResponse response;
     private String track;
 
     private final List<String> color;
@@ -52,17 +50,17 @@ public class CreateOrderParamTest {
     @Test
     public void checkCreateOrderWithDifferentColors() {
         SimpleDateFormat SDFormat = new SimpleDateFormat("yyyy-MM-dd");
-        order = new Order(faker.name().firstName(),
+        Order order = new Order(faker.name().firstName(),
                 faker.name().lastName(),
                 faker.address().fullAddress(),
-                faker.number().numberBetween(1,10),
+                faker.number().numberBetween(1, 10),
                 faker.phoneNumber().phoneNumber(),
-                faker.number().numberBetween(1,10),
+                faker.number().numberBetween(1, 10),
                 SDFormat.format(faker.date().future(10, TimeUnit.DAYS)),
                 faker.bothify("#?#?#?#"),
                 color);
 
-        response = client.createOrder(order);
+        ValidatableResponse response = client.createOrder(order);
         response.assertThat().statusCode(201).body("track", notNullValue());
         track = response.extract().jsonPath().getString("track");
     }
