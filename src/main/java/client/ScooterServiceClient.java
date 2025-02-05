@@ -9,7 +9,7 @@ import static io.restassured.RestAssured.given;
 
 public class ScooterServiceClient {
 
-    private String baseURI;
+    private final String baseURI;
 
     public ScooterServiceClient(String baseURI) {
         this.baseURI = baseURI;
