@@ -1,5 +1,6 @@
 package client;
 
+import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import model.Courier;
 import model.Credentials;
@@ -15,6 +16,7 @@ public class ScooterServiceClient {
         this.baseURI = baseURI;
     }
 
+    @Step("Клиент – создание курьера")
     public ValidatableResponse createCourier (Courier courier) {
         return given()
                 .log()
@@ -28,6 +30,7 @@ public class ScooterServiceClient {
                 .all();
     }
 
+    @Step("Клиент – авторизация курьера")
     public ValidatableResponse loginCourier (Credentials credentials) {
         return given()
                 .log()
@@ -41,6 +44,7 @@ public class ScooterServiceClient {
                 .all();
     }
 
+    @Step("Клиент – удаление курьера")
     public void deleteCourier (String id) {
         if (id == null) {
             System.out.println("Не получен идентификатор курьера для удаления");
@@ -57,6 +61,7 @@ public class ScooterServiceClient {
         }
     }
 
+    @Step("Клиент – создание заказа")
     public ValidatableResponse createOrder(Order order) {
         return given()
                 .log()
@@ -70,6 +75,7 @@ public class ScooterServiceClient {
                 .all();
     }
 
+    @Step("Клиент – отмена заказа")
     public void cancelOrder(String track) {
         given()
                 .log()
@@ -82,6 +88,7 @@ public class ScooterServiceClient {
                 .all();
     }
 
+    @Step("Клиент – получение заказа по трек-номеру")
     public ValidatableResponse getOrderByTrack(String track) {
         return given()
                 .log()
@@ -94,6 +101,7 @@ public class ScooterServiceClient {
                 .all();
     }
 
+    @Step("Клиент – назначение заказа курьеру")
     public void takeOrderToWork(String orderID, String courierId) {
         given()
                 .log()
@@ -106,6 +114,7 @@ public class ScooterServiceClient {
                 .all();
     }
 
+    @Step("Клиент – получение списка заказов курьера")
     public ValidatableResponse getListOfOrders(String courierId) {
         return given()
                 .log()
@@ -118,6 +127,7 @@ public class ScooterServiceClient {
                 .all();
     }
 
+    @Step("Клиент – завершение заказа")
     public void finishOrder(String orderId) {
         given()
                 .log()
